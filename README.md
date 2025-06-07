@@ -1,5 +1,65 @@
-# Vue 3 + Vite
+# 📝 Task Management Web Application (XP-Based)
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+A lightweight task management web application inspired by **To DO From Microsoft**, built using **Vue** and developed with the **Extreme Programming (XP)** methodology.  
+This app allows users to create, view, edit, delete, Mark, and real-time validation and persistent storage.
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+---
+
+## 🚀 Features
+
+- ✅ Add, edit, and delete tasks
+- ✅ Easy to do mark for each task list
+- ✅ Persistent storage (e.g. localStorage)
+- ✅ Real-time form validation for task title
+- ✅ Responsive and clean UI
+
+---
+
+## 🧑‍💻 Team Roles (XP Style)
+
+| Name              | Role                |
+|-------------------|---------------------|
+| Edwin valentino tarigan      | Developer           |
+| M Aswan Taqiy      | XP Coach            |
+| Sintia kristiwanta naibaho  | Customer (Product Owner) |
+
+---
+
+## 🗓️ Development Approach: Extreme Programming (XP)
+
+This project was developed over **1 week** using XP practices:
+
+- **Pair Programming**
+- **Test-Driven Development (TDD)**
+- **Continuous Integration (CI)**
+- **Refactoring**
+- **Planning** for user stories
+
+---
+
+## 🗃️ User Stories
+
+| No | User Story                                                                                                          | Story Point | Prioritas |
+|----|---------------------------------------------------------------------------------------------------------------------|-------------|-----------|
+| 1  | Sebagai pengguna, saya ingin menambahkan tugas baru dengan judul dan tanggal agar saya bisa menjadwalkan pekerjaan. | 2           | Tinggi    |
+| 2  | Sebagai pengguna, saya ingin melihat daftar semua tugas saya agar saya bisa melacak apa yang harus dikerjakan.      | 2           | Tinggi    |
+| 3  | Sebagai pengguna, saya ingin mengedit tugas yang sudah ada agar saya bisa memperbarui atau memperbaiki detailnya.   | 3           | Tinggi    |
+| 4  | Sebagai pengguna, saya ingin menghapus tugas agar saya bisa membersihkan tugas yang tidak lagi diperlukan.          | 2           | Sedang    |
+| 5  | Sebagai pengguna, saya ingin membatalkan mode edit agar saya tidak secara tidak sengaja mengubah tugas.             | 2           | Sedang    |
+| 6  | Sebagai pengguna, saya ingin memiliki kotak centang di samping setiap tugas agar saya bisa menandai tugas tertentu. | 2           | Sedang    |
+| 7  | Sebagai pengguna, saya ingin daftar tugas ditata dan diberi gaya yang baik agar mudah dibaca dan dipahami.          | 2           | Sedang    |
+
+---
+
+## 📦 Installation & Setup
+
+```bash
+
+# Navigate into the project
+cd Task_Manager
+
+# Install dependencies
+npm install
+
+# Start the dev server
+npm run dev
