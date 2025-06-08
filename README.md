@@ -56,7 +56,7 @@ This project was developed over **1 week** using XP practices:
 ```bash
 
 # Navigate into the project
-cd Task_Manager
+cd Project-Task-Manager
 
 # Install dependencies
 npm install
