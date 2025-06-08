@@ -1,46 +1,5 @@
 <script setup>
-import { ref } from 'vue'
-
-const tasks = ref([])
-const newTitle = ref('')
-const newDate = ref('')
-const editingIndex = ref(null)
-const selectedTasks = ref([])
-const showSnackbar = ref(false)
-const snackbarMsg = ref('')
-
-function addTask() {
-  if (newTitle.value.trim() && newDate.value.trim()) {
-    if (editingIndex.value === null) {
-      tasks.value.push({ title: newTitle.value, text: newDate.value, done: false })
-    } else {
-      tasks.value[editingIndex.value].title = newTitle.value
-      tasks.value[editingIndex.value].text = newDate.value
-      editingIndex.value = null
-    }
-    newTitle.value = ''
-    newDate.value = ''
-  }
-}
-
-function deleteTask(index) {
-  tasks.value.splice(index, 1)
-  if (editingIndex.value === index) {
-    editingIndex.value = null
-    newTitle.value = ''
-    newDate.value = ''
-  }
-  const selIdx = selectedTasks.value.indexOf(index)
-  if (selIdx !== -1) selectedTasks.value.splice(selIdx, 1)
-  selectedTasks.value = selectedTasks.value.map(i => i > index ? i - 1 : i)
-}
-
-function editTask(index) {
-  const task = tasks.value[index]
-  newTitle.value = task.title
-  newDate.value = task.text
-  editingIndex.value = index
-}
+import { tasks, newTitle, newDate, editingIndex, selectedTasks, addTask, deleteTask, editTask } from './Home.js'
 </script>
 
 <template>
