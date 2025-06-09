@@ -1,41 +1,72 @@
 <script setup>
-import { tasks, newTitle, newDate, editingIndex, selectedTasks, addTask, deleteTask, editTask } from './Home.js'
+import { tasks, newTitle, newDate, newDescription, newPriority, newStatus, editingIndex, selectedTasks, addTask, deleteTask, editTask } from './Home.js'
+import { computed } from 'vue'
+
+// Computed property to sort tasks by priority
+const sortedTasks = computed(() => {
+  const priorityOrder = { low: 1, medium: 2, high: 3 }
+  return [...tasks.value].sort((a, b) => priorityOrder[b.priority] - priorityOrder[a.priority])
+})
 </script>
 
 <template>
   <h1 class="TITLE">Task Manager</h1>
   <div class="container-new">   
     <div class="add-task-new">
-      <input v-model="newTitle" placeholder="Add a task" class="input-title" />
+      <input v-model="newTitle" placeholder="Task Title" class="input-title" />
+      <textarea v-model="newDescription" placeholder="Task Description" class="input-description"></textarea>
       <div class="bottom">
-        <input type="date" v-model="newDate" class="input-date" />
+        <div class="bottom-container">
+          <label for="date">Due Date:</label>
+          <input type="date" v-model="newDate" class="input-date" />
+        </div>
+        <div class="bottom-container">
+          <label for="priority">Priority:</label>
+          <select v-model="newPriority" class="input-priority">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+        <div class="bottom-container">
+          <label for="status">Status:</label>
+          <select v-model="newStatus" class="input-status">
+            <option value="to-do">To-Do</option>
+            <option value="in-progress">In-Progress</option>
+            <option value="done">Done</option>
+          </select>
+        </div>
         <button class="add-btn" @click="addTask">
           {{ editingIndex === null ? 'Add' : 'Save' }}
         </button>
-        <button class="can-btn" v-if="editingIndex !== null" @click="() => { editingIndex = null; newTitle = ''; newDate = '' }" style="margin-left:8px;">
+        <button class="can-btn" v-if="editingIndex !== null" @click="() => { editingIndex = null; newTitle = ''; newDate = ''; newDescription = ''; newPriority = 'low'; newStatus = 'to-do'; }" style="margin-left:8px;">
           Cancel
         </button>
       </div>
     </div>
   </div>
   <div class="container-new-bottom">
-    <div v-if="tasks.length" class="task-list">
-      <div v-for="(task, idx) in tasks"
+    <div v-if="sortedTasks.length" class="task-list">
+      <div v-for="(task, idx) in sortedTasks"
         :key="idx"
         class="task-item"
-        :style="{ borderBottom: idx !== tasks.length - 1 ? '1px solid Blue' : 'none' }">
+        :style="{ borderBottom: idx !== sortedTasks.length - 1 ? '1px solid Blue' : 'none' }">
         <div class="task-info">
-          <div>
+          <!-- <div>
             <input type="checkbox" :checked="selectedTasks.includes(idx)" @change="toggleSelect(idx)" style="margin-right:10px;" />
-          </div>
+          </div> -->
           <div class="task-container">
             <span class="task-title">{{ task.title }}</span>
-            <span class="task-date">{{ task.text }}</span> 
+            <span class="task-date">{{ task.text }}</span>
+            <span class="task-description">{{ task.description }}</span>
+            <span class="task-priority">Priority: {{ task.priority }}</span>
+            <span class="task-status">Status: {{ task.status }}</span>
           </div>
         </div>       
         <div class="task-actions">
-          <button class="edit" @click="editTask(idx)">Edit</button><br>
-          <button class="delete" @click="deleteTask(idx)">Delete</button>
+          <!-- Cari indeks asli dari task berdasarkan sortedTasks -->
+          <button class="edit" @click="editTask(tasks.findIndex(t => t === task))">Edit</button><br>
+          <button class="delete" @click="deleteTask(tasks.findIndex(t => t === task))">Delete</button>
         </div>
       </div>
     </div>
@@ -45,7 +76,6 @@ import { tasks, newTitle, newDate, editingIndex, selectedTasks, addTask, deleteT
   </div>
   <div v-if="showSnackbar" class="snackbar">{{ snackbarMsg }}</div>
 </template>
-
 <style>
 
 .TITLE {
@@ -56,6 +86,7 @@ import { tasks, newTitle, newDate, editingIndex, selectedTasks, addTask, deleteT
   font-weight: 700;
   letter-spacing: 1px;
 }
+
 .container-new {
   max-width: 90%;
   margin: 40px auto;
@@ -93,8 +124,37 @@ import { tasks, newTitle, newDate, editingIndex, selectedTasks, addTask, deleteT
   font-size: 16px;
   transition: border 0.2s;
 }
+
+.input-description {
+  width: 98.5%;
+  height: 80px;
+  padding: 12px;
+  margin-bottom: 12px;
+  border: 1px solid #3182ce;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: border 0.2s;
+}
+
+
+.input-description:focus, .input-title:focus {
+  border: 1.5px solid #3182ce;
+  outline: none;
+}
+
+.input-priority, .input-status {
+  width: 70%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border: 1px solid #3182ce;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: border 0.2s;
+}
+
 .input-date {
-  width: 20%;
+  width: 70%;
+  align-items: center;
   padding: 12px;
   margin-bottom: 12px;
   border: 1px solid #3182ce;
@@ -108,9 +168,9 @@ import { tasks, newTitle, newDate, editingIndex, selectedTasks, addTask, deleteT
 }
 .bottom {
   display: flex;
-  gap: 12px;
+  gap: px;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 .add-btn {
   margin-top: -15px;
@@ -181,6 +241,19 @@ import { tasks, newTitle, newDate, editingIndex, selectedTasks, addTask, deleteT
   display: flex;
   width: 100%;
 }
+
+.task-description {
+  color: #4a5568;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.task-priority, .task-status {
+  color: #2d3748;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
 .empty-state {
   text-align: center;
   color: #a0aec0;
@@ -223,5 +296,20 @@ import { tasks, newTitle, newDate, editingIndex, selectedTasks, addTask, deleteT
 .delete:hover {
   background: red;
   color: white;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.bottom-container {
+  width: 20%;
+  display: block;
+  padding : 12px;
+  flex-direction: column;
+  margin-bottom: 1rem;
 }
 </style>
