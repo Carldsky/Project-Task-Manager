@@ -1,7 +1,7 @@
 # 📝 Task Management Web Application (XP-Based)
 
 A lightweight task management web application inspired by **To DO From Microsoft**, built using **Vue** and developed with the **Extreme Programming (XP)** methodology.  
-This app allows users to create, view, edit, delete, Mark, and real-time validation and persistent storage.
+This app allows users to create, view, edit, delete, Mark, and real-time validation and persistent storage, and priority low to high and Status TO DO, In Progress, Done.
 
 ---
 
@@ -9,6 +9,8 @@ This app allows users to create, view, edit, delete, Mark, and real-time validat
 
 - ✅ Add, edit, and delete tasks
 - ✅ Easy to do mark for each task list
+- ✅ Have priority low to high
+- ✅ Can make Status of TO DO (Status TO DO, In Progress, Done)
 - ✅ Persistent storage (e.g. localStorage)
 - ✅ Real-time form validation for task title
 - ✅ Responsive and clean UI
@@ -54,6 +56,9 @@ This project was developed over **1 week** using XP practices:
 ## 📦 Installation & Setup
 
 ```bash
+
+# Link website
+https://project-task-manager-cyan.vercel.app/
 
 # Navigate into the project
 cd Project-Task-Manager

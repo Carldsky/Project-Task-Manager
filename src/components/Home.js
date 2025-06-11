@@ -1,6 +1,15 @@
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
-export const tasks = ref([])
+// Ambil data dari localStorage saat aplikasi dimuat
+let saved = []
+try {
+  const raw = localStorage.getItem('tasks')
+  saved = raw ? JSON.parse(raw) : []
+} catch (e) {
+  console.error("Failed to load tasks from localStorage:", e)
+}
+
+export const tasks = ref(saved)
 export const newTitle = ref('')
 export const newDate = ref('')
 export const newDescription = ref('')
@@ -10,6 +19,11 @@ export const editingIndex = ref(null)
 export const selectedTasks = ref([])
 export const showSnackbar = ref(false)
 export const snackbarMsg = ref('')
+
+// Simpan ke localStorage setiap kali tasks berubah
+watch(tasks, (newTasks) => {
+  localStorage.setItem('tasks', JSON.stringify(newTasks))
+}, { deep: true })
 
 export function addTask() {
   if (newTitle.value.trim() && newDate.value.trim() && newDescription.value.trim()) {

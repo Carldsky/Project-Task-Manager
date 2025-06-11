@@ -52,9 +52,7 @@ const sortedTasks = computed(() => {
         class="task-item"
         :style="{ borderBottom: idx !== sortedTasks.length - 1 ? '1px solid Blue' : 'none' }">
         <div class="task-info">
-          <!-- <div>
-            <input type="checkbox" :checked="selectedTasks.includes(idx)" @change="toggleSelect(idx)" style="margin-right:10px;" />
-          </div> -->
+
           <div class="task-container">
             <span class="task-title">{{ task.title }}</span>
             <span class="task-date">{{ task.text }}</span>
@@ -64,7 +62,7 @@ const sortedTasks = computed(() => {
           </div>
         </div>       
         <div class="task-actions">
-          <!-- Cari indeks asli dari task berdasarkan sortedTasks -->
+
           <button class="edit" @click="editTask(tasks.findIndex(t => t === task))">Edit</button><br>
           <button class="delete" @click="deleteTask(tasks.findIndex(t => t === task))">Delete</button>
         </div>
