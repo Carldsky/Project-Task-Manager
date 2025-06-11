@@ -55,10 +55,10 @@ const sortedTasks = computed(() => {
 
           <div class="task-container">
             <span class="task-title">{{ task.title }}</span>
-            <span class="task-date">{{ task.text }}</span>
             <span class="task-description">{{ task.description }}</span>
             <span class="task-priority">Priority: {{ task.priority }}</span>
             <span class="task-status">Status: {{ task.status }}</span>
+            <span class="task-date">{{ task.text }}</span>
           </div>
         </div>       
         <div class="task-actions">
